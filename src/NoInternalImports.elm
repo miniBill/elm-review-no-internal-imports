@@ -221,7 +221,7 @@ checkDir context elmJsonKey dir =
                             , "External paths are the ones starting with \"..\" or \"/\""
                             ]
                         , range =
-                            findRange dir rawElmJson
+                            findRange ("\"" ++ dir ++ "\"") rawElmJson
                                 |> Maybe.withDefault Range.empty
                         }
                     )
