@@ -27,18 +27,25 @@ import Set exposing (Set)
         [ NoInternalImports.rule []
         ]
 
-The parameter must be the list of `source-directories` that are _outside_ your project's root (that is, the ones that start with `..` or `/`).
+You must pass as parameter all the `source-directories` that are _outside_ your project's root (that is, the ones that start with `..` or `/`).
+
+Package boundaries are automatically detected by searching for `elm.json` files one level up from the directories ending with `/src`.
+
+The packages don't need to be published, so you can separate a larger app into "packages" by simply creating the necessary `elm.json` files. The rule extracts the exposed modules from there and prevents importing of anything else.
 
 
 ## Fail
 
-import Element.Internal
+Assuming you are vendoring `elm-ui`, the rule will detect an import such as:
+
+    import Element.Internal
 
 
 ## When (not) to enable this rule
 
 This rule is useful when you are vendoring a dependency but still want to make sure to only use the external API.
-This rule is not useful when you vendored it to explicitly access the internals.
+
+This rule is not useful when you vendored it to explicitly access the internals. In that case you can simply remove the package's `elm.json` file, and the rule will stop considering it a separate package.
 
 
 ## Try it out
