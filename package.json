@@ -1,5 +1,6 @@
 {
   "name": "elm-review-no-internal-imports",
+  "license": "BSD-3-Clause",
   "private": true,
   "scripts": {
     "test": "npm-run-all --print-name --silent --sequential test:make test:format test:run test:review test:package",
