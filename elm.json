@@ -1,7 +1,7 @@
 {
     "type": "package",
     "name": "miniBill/elm-review-no-internal-imports",
-    "summary": "",
+    "summary": "Prevent boundary-crossing imports when vendoring packages ",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
     "exposed-modules": [
