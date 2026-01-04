@@ -31,9 +31,9 @@ a = 1
         --                     |> Review.Test.runWithProjectData project (rule [])
         --                     |> Review.Test.expectErrors
         --                         [ Review.Test.error
-        --                             { message = "REPLACEME"
-        --                             , details = [ "REPLACEME" ]
-        --                             , under = "REPLACEME"
+        --                             { message = "TODO"
+        --                             , details = [ "TODO" ]
+        --                             , under = "TODO"
         --                             }
         --                         ]
         ]

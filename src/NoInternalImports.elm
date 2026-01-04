@@ -9,7 +9,7 @@ module NoInternalImports exposing (rule)
 import Dict exposing (Dict)
 import Elm.Module as Module
 import Elm.Package as Package
-import Elm.Project as Project exposing (Project(..))
+import Elm.Project as Project exposing (Project)
 import Elm.Syntax.Import exposing (Import)
 import Elm.Syntax.ModuleName exposing (ModuleName)
 import Elm.Syntax.Node exposing (Node(..))
@@ -95,13 +95,6 @@ extraFilesVisitor : Dict String { fileKey : Rule.ExtraFileKey, content : String 
 extraFilesVisitor files initialContext =
     Dict.foldl
         (\path { fileKey, content } ( errs, context ) ->
-            let
-                directory : Path
-                directory =
-                    path
-                        |> toPath
-                        |> dirName
-            in
             case Json.Decode.decodeString Project.decoder content of
                 Ok (Project.Application _) ->
                     -- Not a separate package
@@ -143,6 +136,12 @@ extraFilesVisitor files initialContext =
                                         )
                                         Set.empty
                                         dict
+
+                        directory : Path
+                        directory =
+                            path
+                                |> toPath
+                                |> dirName
                     in
                     ( errs
                     , { context
@@ -356,6 +355,7 @@ importVisitor (Node range import_) context =
 
                 else
                     let
+                        exposedString : String
                         exposedString =
                             exposed
                                 |> Set.toList
